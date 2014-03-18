@@ -1,0 +1,9 @@
+http://www.playframework.com/documentation/2.2.x/ScalaTodoList
+http://scala-ide.org/docs/tutorials/play/
+
+something different:
+* check out http://skydb.io/
+* check out https://github.com/mozilla-services/heka
+* http://blog.drone.io/2014/2/6/open-source-ci-with-docker.html
+* http://venturebeat.com/2014/02/07/droneio/
+
