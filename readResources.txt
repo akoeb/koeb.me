@@ -7,3 +7,6 @@ something different:
 * http://blog.drone.io/2014/2/6/open-source-ci-with-docker.html
 * http://venturebeat.com/2014/02/07/droneio/
 
+
+# javascript client framework, check out:
+* http://lhorie.github.io/mithril/
