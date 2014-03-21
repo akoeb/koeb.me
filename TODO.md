@@ -53,6 +53,13 @@ TASKS:
 ## timetracking as plugin ##
 * later
 
+## later addons ##
+* a/b testing
+* user metrics, clickstreams, etc
+* block suspicious users/IPs according to defined patterns
+
+
+
 FEATURES:
 =========
 * fast
