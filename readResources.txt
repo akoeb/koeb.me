@@ -1,5 +1,7 @@
 http://www.playframework.com/documentation/2.2.x/ScalaTodoList
 http://scala-ide.org/docs/tutorials/play/
+https://www.meteor.com/blog/2014/03/27/meteor-080-introducing-blaze
+
 
 something different:
 * check out http://skydb.io/
