@@ -12,3 +12,6 @@ something different:
 
 # javascript client framework, check out:
 * http://lhorie.github.io/mithril/
+
+# check out ab testing
+* https://github.com/sendwithus/confidence
