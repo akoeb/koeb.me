@@ -1,7 +1,7 @@
 @(currentPage: Page[Post])(implicit flash: Flash)
 @import helper._
 @main("koeb.me: things I want to tell the world"){
-    <h1>@currentPage.total Posts</h1>
+    <p>&nbsp;</p>
     @flash.get("success").map { message =>
         <div class="alert-message warning">
             <strong>Done!</strong> @message
@@ -9,11 +9,11 @@
     }
     @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
         @postList.map { post =>
-            <h2>@post.title</h2>
-            <a href="@routes.Application.editPost(post.id.get)">Modify</a>
-            <strong>@post.teaser</strong>
-            <small>@post.created</small>
-            <p>@post.text</p>
+            <h2 class="postTitle">@post.title</h2>
+            <div class="postDate">Posted on @post.created.map(_.format("yyyy-MM-dd")).getOrElse { <em>-</em> }</div>
+            <div class="postTeaser">@post.teaser</div>
+            <p class="postText">@post.text</p>
+            <a href="@routes.Application.editPost(post.id.get)" class="postEditLink">Modify</a>
         }
 
         <div id="pagination" class="pagination">

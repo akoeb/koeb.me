@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Special Elite';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Special Elite'), local('SpecialElite-Regular'), url('/assets/stylesheets/SpecialElite.woff') format('woff');
+}
+
+
+body {
+    margin: 0 auto;
+    padding: 0px;
+    font-family: Special Elite, serif;
+    font-size: 13px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+#outer {
+    margin: 0 auto;
+    padding: 5px;
+    width: 900px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    box-shadow: -10px 10px 5px #888888;
+    text-align: left;
+    border: 1px solid black;
+    background-image: url("/assets/images/background.jpg");
+    background-repeat:repeat;
+    text-shadow: -1px 1px white, -1px 1px #444;
+}
+
+#conHead {
+    text-align: center;
+    font-size: 15px;
+}
+
+.postTeaser {
+    font-weight: bold;
+}
+.postDate {
+    text-align: right;
+    position: relative;
+    right: 20px;
+    font-size: 10px;
+}
+.postEditLink {
+    text-align: right;
+    right: 20px;
+    font-size: 10px;
+}
