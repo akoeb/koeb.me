@@ -9,6 +9,17 @@ import anorm.SqlParser._
 import java.util.{Date}
 
 
+
+/**
+ * Helper for pagination.
+ */
+case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
+    lazy val prev = Option(page - 1).filter(_ >= 0)
+    lazy val next = Option(page + 1).filter(_ => (offset + items.size) < total)
+}
+
+
+
 case class Post(id: Pk[Long] = NotAssigned, title: String, teaser: Option[String], text: String, created: Option[Date] )
 
 
@@ -45,13 +56,18 @@ object Post {
     * @param page The page number, 0 to start
     * @param postsPerPage number of posts we want to display on each page
     */
-    def list(page: Int, postsPerPage: Int): List[Post] = {
+    def list(page: Int, postsPerPage: Int): Page[Post] = {
         val offset = page * postsPerPage
         DB.withConnection { implicit conn =>
-            SQL("SELECT * from posts order by created desc limit {postsPerPage} offset {offset}").on(
+
+            val posts = SQL("SELECT * from posts order by created desc limit {postsPerPage} offset {offset}").on(
                 'offset -> offset,
                 'postsPerPage -> postsPerPage
             ).as(post *)
+        
+            val total = SQL("SELECT COUNT(*) FROM posts").as(scalar[Long].single)
+        
+            Page(posts, page, offset, total)
         }
     }
 

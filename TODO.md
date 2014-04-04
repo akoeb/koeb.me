@@ -1,8 +1,5 @@
 NEXT:
 ====
-* edit action
-* delete action
-* pagination links
 * fix that ignored crap
 * css
 * session management and login to intern, no sessions unless user logs in 

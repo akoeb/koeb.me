@@ -1,19 +1,49 @@
-@(posts: List[Post])(implicit flash: Flash)
+@(currentPage: Page[Post])(implicit flash: Flash)
 @import helper._
 @main("koeb.me: things I want to tell the world"){
+    <h1>@currentPage.total Posts</h1>
     @flash.get("success").map { message =>
         <div class="alert-message warning">
             <strong>Done!</strong> @message
         </div>
     }
-    <h1>@posts.size Posts</h1>
-    @posts.map { post =>
-        <h2>@post.title</h2>
-        <a href="@routes.Application.editPost(post.id.get)">Modify</a>
-        <strong>@post.teaser</strong>
-        <small>@post.created</small>
-        <p>@post.text</p>
+    @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
+        @postList.map { post =>
+            <h2>@post.title</h2>
+            <a href="@routes.Application.editPost(post.id.get)">Modify</a>
+            <strong>@post.teaser</strong>
+            <small>@post.created</small>
+            <p>@post.text</p>
+        }
+
+        <div id="pagination" class="pagination">
+            <ul>
+                @currentPage.prev.map { page =>
+                    <li class="prev">
+                    <a href="@routes.Application.listPosts(page)">&larr; Newer</a>
+                    </li> 
+                }.getOrElse {
+                    <li class="prev disabled">
+                    <a>&larr; Newer</a>
+                    </li>
+                }
+    
+                
+                @currentPage.next.map { page =>
+                    <li class="next">
+                    <a href="@routes.Application.listPosts(page)">Older &rarr;</a>
+                    </li> 
+                }.getOrElse {
+                    <li class="next disabled">
+                    <a>Older &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>    
+
+    }.getOrElse {
+        <div class="NoPost">
+            <em>No posts yet, stay tuned!</em>
+        </div>
     }
 }
-
-

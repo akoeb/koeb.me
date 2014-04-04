@@ -42,7 +42,7 @@ object Application extends Controller {
      * @param page Current page number (starts from 0)
      * @param postsPerPage number of posts on one page
      */
-    def listPosts(page: Int, postsPerPage: Int) = Action { implicit request =>
+    def listPosts(page: Int, postsPerPage: Int = 10) = Action { implicit request =>
         Ok(html.list(Post.list(page = page, postsPerPage = postsPerPage)))
     }
 
