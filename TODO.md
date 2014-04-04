@@ -1,14 +1,16 @@
 NEXT:
 ====
-* fix that ignored crap
-* css
 * session management and login to intern, no sessions unless user logs in 
-* on listing: link to intern if logged in
+* on listing: link to create new if logged in
 * on listing: with every post, link to edit or delete if logged in
 * connect to external database
 * publish feature:
 ** when logged on, see all posts, unpublished posts have an extra button "publish", pubished posts have an extra button "unpublish"
 ** when not logged on, see only published posts
+* fix that ignored crap, test whether date can be overwritten
+* test what happens if non-existing id is called
+* install blog somewhere in production, start to write posts
+
 
 
 IDEA:
