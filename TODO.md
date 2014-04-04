@@ -70,6 +70,12 @@ TASKS:
 * method to recompile and refresh cache
 * http://stackoverflow.com/questions/19556028/play-framework-2-1-3-function-that-will-render-scala-template-with-given-paramet
 
+## refactor for JSON
+* do not submit html, but simple json
+* client side templating
+* meteor??
+
+
 ## notes as plugin ##
 * CRUD for notes
 * tag to show notes
