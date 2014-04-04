@@ -84,9 +84,9 @@ object Post {
         DB.withConnection { implicit connection =>
             SQL(
                 """
-                update posts
-                set title = {title}, teaser = {teaser}, text = {text}
-                where id = {id}
+                UPDATE posts
+                SET title = {title}, teaser = {teaser}, text = {text}
+                WHERE id = {id}
             """
             ).on(
                 'id -> id,
@@ -98,7 +98,16 @@ object Post {
     }
 
 
-    def delete(id: Long) {}
-
+    def delete(id: Long) = {
+        DB.withConnection { implicit connection =>
+            SQL(
+                """
+                DELETE FROM posts WHERE id = {id}
+                """
+            ).on(
+                'id -> id
+            ).executeUpdate()
+        }
+    }
 
 }

@@ -100,7 +100,11 @@ object Application extends Controller {
      *
      * @param id the post id
      */
-    def deletePost(id: Long) = TODO
+    def deletePost(id: Long) = Action { 
+        Post.delete(id)
+        Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been deleted")
+    }
+
 
 
 }
