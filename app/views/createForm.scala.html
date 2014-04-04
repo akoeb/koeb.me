@@ -1,0 +1,28 @@
+@(postForm: Form[Post])
+
+@import helper._
+
+
+@main("Create Form") {
+    
+    <h1>Add a computer</h1>
+    
+    @form(routes.Application.savePost()) {
+        
+        <fieldset>
+        
+            @inputText(postForm("title"), '_label -> "Title")
+            @textarea(postForm("teaser"), args = 'rows -> 10, 'cols -> 80, '_label -> "Teaser Text")
+            @textarea(postForm("text"),  args = 'rows -> 60, 'cols -> 80, '_label -> "Post Body")
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save" class="btn primary"> or 
+            <a href="@routes.Application.listPosts()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}
+

@@ -7,3 +7,16 @@ GET     /                           controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+# public list of all blog posts
+GET     /blog                      controllers.Application.listPosts(p:Int ?= 0, s:Int ?= 10)
+
+# private CRUD actions for blog posts
+GET      /intern/blog/new               controllers.Application.createPost
+POST     /intern/blog                   controllers.Application.savePost
+GET      /intern/blog/:id               controllers.Application.editPost(id:Long)
+POST     /intern/blog/:id               controllers.Application.updatePost(id:Long)
+POST     /intern/blog/:id/delete        controllers.Application.deletePost(id:Long)
+
+
