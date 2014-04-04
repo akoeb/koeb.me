@@ -56,9 +56,9 @@ object Post {
     }
 
     /**
-     * Insert a new computer.
+     * Insert a new post.
      *
-     * @param computer The computer values.
+     * @param post the post to insert
      */
     def insert(post: Post) = {
         DB.withConnection { implicit connection =>
@@ -67,6 +67,29 @@ object Post {
                     (select next value for post_id_seq), 
                     {title}, {teaser}, {text}, now()
                 )""").on(
+                'title -> post.title,
+                'teaser -> post.teaser,
+                'text -> post.text
+            ).executeUpdate()
+        }
+    }
+
+    /**
+     * modify an existing post
+     *
+     * @param id the post id
+     * @param post the post to update
+     */
+    def update(id: Long, post: Post) = {
+        DB.withConnection { implicit connection =>
+            SQL(
+                """
+                update posts
+                set title = {title}, teaser = {teaser}, text = {text}
+                where id = {id}
+            """
+            ).on(
+                'id -> id,
                 'title -> post.title,
                 'teaser -> post.teaser,
                 'text -> post.text

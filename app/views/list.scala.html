@@ -1,6 +1,6 @@
 @(posts: List[Post])(implicit flash: Flash)
 @import helper._
-@main("my blog"){
+@main("koeb.me: things I want to tell the world"){
     @flash.get("success").map { message =>
         <div class="alert-message warning">
             <strong>Done!</strong> @message

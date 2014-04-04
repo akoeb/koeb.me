@@ -57,9 +57,6 @@ object Application extends Controller {
     /**
      * save a new Post to the persistence backend
      *
-     * @param title the post headline 
-     * @param teaser the teaser text of the post
-     * @param text   the post body
      */
     def savePost = Action { implicit request =>
         blogPostForm.bindFromRequest.fold(
@@ -87,11 +84,16 @@ object Application extends Controller {
      * save changes to an existing post
      * 
      * @param id the post id
-     * @param title the post headline 
-     * @param teaser the teaser text of the post
-     * @param text   the post body
      */
-    def updatePost(id: Long) = TODO
+    def updatePost(id: Long) = Action { implicit request =>
+        blogPostForm.bindFromRequest.fold(
+            formWithErrors => BadRequest(html.editForm(id, formWithErrors)),
+            blogPost => {
+                Post.update(id, blogPost)
+                Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been updated")
+            }
+        )
+    }
 
     /**
      * delete a post
