@@ -1,4 +1,4 @@
-@(posts: List[Post])(implicit flash: play.api.mvc.Flash)
+@(posts: List[Post])(implicit flash: Flash)
 @import helper._
 @main("my blog"){
     @flash.get("success").map { message =>
@@ -9,6 +9,7 @@
     <h1>@posts.size Posts</h1>
     @posts.map { post =>
         <h2>@post.title</h2>
+        <a href="@routes.Application.editPost(post.id.get)">Modify</a>
         <strong>@post.teaser</strong>
         <small>@post.created</small>
         <p>@post.text</p>

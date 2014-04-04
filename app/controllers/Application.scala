@@ -66,9 +66,8 @@ object Application extends Controller {
             formWithErrors => BadRequest(html.createForm(formWithErrors)),
             blogPost => {
                 /* binding success, you get the actual value. */
-                //val newPost = Post(blogPost.title, blogPost.teaser, blogPost.text)
                 Post.insert(blogPost)
-                Redirect(routes.Application.index).flashing("success" -> "Post %s has been created".format(blogPost.title))
+                Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been created")
             }
         )
     }
@@ -78,7 +77,11 @@ object Application extends Controller {
      *
      * @param id the post id
      */
-    def editPost(id: Long) = TODO
+    def editPost(id: Long) = Action {
+        Post.findPostById(id).map { post =>
+            Ok(html.editForm(id,blogPostForm.fill(post)))
+        }.getOrElse(NotFound)
+    }
 
     /**
      * save changes to an existing post

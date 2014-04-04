@@ -1,11 +1,9 @@
 NEXT:
 ====
-* success flash message
-* error flash message
-* fix that ignored crap
 * edit action
 * delete action
 * pagination links
+* fix that ignored crap
 * css
 * session management and login to intern, no sessions unless user logs in 
 * on listing: link to intern if logged in
@@ -71,6 +69,7 @@ TASKS:
 * http://stackoverflow.com/questions/19556028/play-framework-2-1-3-function-that-will-render-scala-template-with-given-paramet
 
 ## refactor for JSON
+* Content negotiation
 * do not submit html, but simple json
 * client side templating
 * meteor??

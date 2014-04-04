@@ -25,8 +25,22 @@ object Post {
         }
     }
 
-    /*
-    * model to return a paginated list of posts
+    /**
+     * Find a post from ID
+     *
+     * @param id The primary key of the post
+     */
+    def findPostById(id: Long):Option[Post] = {
+        DB.withConnection { implicit connection =>
+            SQL("select * from posts where id = {id}").
+                on('id -> id).
+                as(post.singleOpt)
+        }
+    }
+
+
+    /**
+    * return a paginated list of posts
     *
     * @param page The page number, 0 to start
     * @param postsPerPage number of posts we want to display on each page
