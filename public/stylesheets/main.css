@@ -34,6 +34,12 @@ body {
     font-size: 15px;
 }
 
+.postTitle {
+    font-weight: bold;
+    position: relative;
+    text-align: left;
+    left: 50px;
+}
 .postTeaser {
     font-weight: bold;
 }
@@ -42,9 +48,39 @@ body {
     position: relative;
     right: 20px;
     font-size: 10px;
+    vertical-align: top;
 }
 .postEditLink {
     text-align: right;
     right: 20px;
     font-size: 10px;
+}
+.error {
+    margin: 0 auto;
+    color: red;
+    padding: 5px;
+    border: 2px solid red;
+    width: 200px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #D8D8D8;
+}
+.error strong {
+    text-align: center;
+}
+.success {
+    margin: 0 auto;
+    color: green;
+    padding: 5px;
+    border: 2px solid green;
+    width: 200px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #D8D8D8;
+}
+.success strong {
+    text-align: center;
+}
+h1 {
+    text-align: center;
 }
