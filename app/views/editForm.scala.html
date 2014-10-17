@@ -6,11 +6,11 @@
 @main("Modify an existing post") {
     
     <h1>Modify a post</h1>
-    @form(routes.Application.deletePost(id), 'class -> "topRight") {
+    @form(routes.Blog.deletePost(id), 'class -> "topRight") {
         <input type="submit" value="Delete this blog post" class="btn danger">
     }
     <br />    
-    @form(routes.Application.updatePost(id)) {
+    @form(routes.Blog.updatePost(id)) {
         <div class="actions">
             <input type="submit" value="Update" class="btn primary"> or 
             <a href="@routes.Application.listPosts()" class="btn">Cancel</a> 
@@ -32,7 +32,7 @@
     }
 
     <br />    
-    @form(routes.Application.deletePost(id), 'class -> "topRight") {
+    @form(routes.Blog.deletePost(id), 'class -> "topRight") {
         <input type="submit" value="Delete this blog post" class="btn danger">
     }    
 }

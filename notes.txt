@@ -1,0 +1,18 @@
+write blog post about the web app
+* play standalone downloaded
+* introduction tutorial
+* basic scala knowledge
+* mapping data from form to model with ignored fields
+* link to github
+* https://github.com/akoeb/koeb.me/tree/7e75fbea5c74d50b9d4300220bf04e5a623919ea
+
+next: authenticate:
+* use https://github.com/t2v/play2-auth
+* I want token based sessions with cached session values
+* This is stateful, but I do not really truse stateless implementation where the session cookie contains all the information
+* to be still scalable, one could back th elocal ehcache with a  redis db
+
+next blog post: testing
+
+
+set up application with docker and varnish

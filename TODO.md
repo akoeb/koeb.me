@@ -4,6 +4,9 @@ NEXT:
 * on listing: link to create new if logged in
 * on listing: with every post, link to edit or delete if logged in
 * connect to external database
+* blog post sub pages
+* cashing of index page and sub pages
+* check out google fast web app recommendations
 * publish feature:
 ** when logged on, see all posts, unpublished posts have an extra button "publish", pubished posts have an extra button "unpublish"
 ** when not logged on, see only published posts
