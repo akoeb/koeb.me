@@ -1,8 +1,9 @@
 NEXT:
 ====
-* session management and login to intern, no sessions unless user logs in 
-* on listing: link to create new if logged in
-* on listing: with every post, link to edit or delete if logged in
+* in session management, stor euser id instead of username
+* on listing: link to create new ONLY if logged in
+* on listing: with every post, link to edit or delete ONLY if logged in
+* on listin: pagination ONLY if there are more pages
 * connect to external database
 * blog post sub pages
 * cashing of index page and sub pages

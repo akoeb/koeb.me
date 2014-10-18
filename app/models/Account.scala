@@ -5,6 +5,7 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 import org.mindrot.jbcrypt.BCrypt
+import play.api.Logger
 
 case class Account(id: Pk[Long] = NotAssigned, username: String, password: String, email: String )
 

@@ -59,9 +59,13 @@ object Application extends Controller with Secured {
        loginForm.bindFromRequest.fold(
            formWithErrors => BadRequest(html.loginForm(formWithErrors)),
            user => {
-                val token = request.session.get("sessionID") + ":username"
-                Cache.set(token, user)
-                Redirect(routes.Blog.createPost)
+        	   Logger.info("Found user: " + user.toString)
+                val uuid = java.util.UUID.randomUUID.toString
+                val token = uuid + ":username"
+                Logger.info("user authenticated ok: " + user.toString + ", token: " + token)
+                Cache.set(token, user._1)
+                Redirect(routes.Blog.createPost).withSession(
+                    "uuid" -> uuid)
            }
        )
    }
@@ -69,10 +73,12 @@ object Application extends Controller with Secured {
    /**
     * Logout and clean the session.
     */
-   def logout = Action {
+   def logout = Action { implicit request => {
+       val token = request.session.get("uuid") + ":username"
+       Cache.remove(token)
        Redirect(routes.Application.login).withNewSession.flashing(
            "success" -> "You've been logged out"
-       )
+       )}
    }
    
 }

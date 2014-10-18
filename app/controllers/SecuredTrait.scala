@@ -12,8 +12,8 @@ trait Secured {
    * Retrieve the connected username .
    */
   private def username(request: RequestHeader) = {
-      val token = request.session.get("sessionID") + ":username"
-      Cache.get(token).map(_.asInstanceOf[String])
+      val token = request.session.get("uuid").orNull + ":username"
+      Cache.getAs[String](token)
   }
 
   /**
