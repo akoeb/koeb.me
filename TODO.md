@@ -1,8 +1,7 @@
 NEXT:
 ====
-* in session management, stor euser id instead of username
+* in session management, store user id instead of username
 * on listing: link to create new ONLY if logged in
-* on listing: with every post, link to edit or delete ONLY if logged in
 * on listin: pagination ONLY if there are more pages
 * connect to external database
 * blog post sub pages

@@ -1,4 +1,4 @@
-@(currentPage: Page[Post])(implicit flash: Flash)
+@(currentPage: Page[Post], authUser: Option[String])(implicit flash: Flash)
 @import helper._
 @main("koeb.me: things I want to tell the world"){
     <p>&nbsp;</p>
@@ -12,13 +12,19 @@
             <strong>Error!</strong><br/>@message
         </div>
     }
+    @Option(authUser).filterNot(_.isEmpty).map { user =>
+    	<h2>Logged in user: @authUser.orNull</h2>
+    }
+    	
     @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
         @postList.map { post =>
             <h2 class="postTitle">@post.title</h2>
             <div class="postDate">Posted on @post.created.map(_.format("yyyy-MM-dd"))</div>
             <div class="postTeaser">@post.teaser</div>
             <p class="postText">@post.text</p>
+            @if(authUser.isDefined) {
             <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a>
+            }
             <hr width="200">
             <br />
         }

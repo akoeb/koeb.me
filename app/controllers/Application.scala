@@ -42,7 +42,7 @@ object Application extends Controller with Secured {
      * @param postsPerPage number of posts on one page
      */
     def listPosts(page: Int, postsPerPage: Int = 10) = Action { implicit request =>
-        Ok(html.list(Post.list(page = page, postsPerPage = postsPerPage)))
+        Ok(html.list(Post.list(page = page, postsPerPage = postsPerPage), username(request)))
     }
 
     /**
