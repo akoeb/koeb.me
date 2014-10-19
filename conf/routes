@@ -3,14 +3,16 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                           controllers.StaticPages.index
+GET     /about						controllers.StaticPages.about
+GET     /contact					controllers.StaticPages.contact
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
 # public list of all blog posts
-GET     /blog                      controllers.Application.listPosts(p:Int ?= 0, s:Int ?= 10)
+GET     /blog                      controllers.Blog.listPosts(p:Int ?= 0, s:Int ?= 10)
 
 # authentication
 # Authentication

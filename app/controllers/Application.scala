@@ -31,19 +31,10 @@ object Application extends Controller with Secured {
 
     // Homepage action
     def index = Action {
-        Redirect(routes.Application.listPosts(0,10))
+        Redirect(routes.Blog.listPosts(0,10))
     }
 
 
-    /**
-     * Display the paginated list of posts
-     *
-     * @param page Current page number (starts from 0)
-     * @param postsPerPage number of posts on one page
-     */
-    def listPosts(page: Int, postsPerPage: Int = 10) = Action { implicit request =>
-        Ok(html.list(Post.list(page = page, postsPerPage = postsPerPage), username(request)))
-    }
 
     /**
      * Login page.

@@ -32,6 +32,15 @@ object Blog extends Controller with Secured {
             "created" -> optional(date)
         )(Post.apply)(Post.unapply)
     )
+    /**
+     * Display the paginated list of posts
+     *
+     * @param page Current page number (starts from 0)
+     * @param postsPerPage number of posts on one page
+     */
+    def listPosts(page: Int, postsPerPage: Int = 10) = Action { implicit request =>
+        Ok(html.blog.list(Post.list(page = page, postsPerPage = postsPerPage), username(request)))
+    }
 
     
     /**
@@ -39,7 +48,7 @@ object Blog extends Controller with Secured {
      *
      */
     def createPost = IsAuthenticated { user => request =>
-        Ok(html.createForm(blogPostForm))
+        Ok(html.blog.createForm(blogPostForm))
     }
 
 
@@ -49,11 +58,11 @@ object Blog extends Controller with Secured {
      */
     def savePost = IsAuthenticated { user => implicit request =>
         blogPostForm.bindFromRequest.fold(
-            formWithErrors => BadRequest(html.createForm(formWithErrors)),
+            formWithErrors => BadRequest(html.blog.createForm(formWithErrors)),
             blogPost => {
                 /* binding success, you get the actual value. */
                 Post.insert(blogPost)
-                Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been created")
+                Redirect(routes.Blog.listPosts(0,10)).flashing("success" -> "Post has been created")
             }
         )
     }
@@ -65,7 +74,7 @@ object Blog extends Controller with Secured {
      */
     def editPost(id: Long) = IsAuthenticated { user => request =>
         Post.findPostById(id).map { post =>
-            Ok(html.editForm(id,blogPostForm.fill(post)))
+            Ok(html.blog.editForm(id,blogPostForm.fill(post)))
         }.getOrElse(NotFound)
     }
 
@@ -76,10 +85,10 @@ object Blog extends Controller with Secured {
      */
     def updatePost(id: Long) = IsAuthenticated { user => implicit request =>
         blogPostForm.bindFromRequest.fold(
-            formWithErrors => BadRequest(html.editForm(id, formWithErrors)),
+            formWithErrors => BadRequest(html.blog.editForm(id, formWithErrors)),
             blogPost => {
                 Post.update(id, blogPost)
-                Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been updated")
+                Redirect(routes.Blog.listPosts(0,10)).flashing("success" -> "Post has been updated")
             }
         )
     }
@@ -91,7 +100,7 @@ object Blog extends Controller with Secured {
      */
     def deletePost(id: Long) = IsAuthenticated { user => request =>
         Post.delete(id)
-        Redirect(routes.Application.listPosts(0,10)).flashing("success" -> "Post has been deleted")
+        Redirect(routes.Blog.listPosts(0,10)).flashing("success" -> "Post has been deleted")
     }
 
 }

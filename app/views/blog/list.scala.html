@@ -21,7 +21,8 @@
             <p class="postText">@Html(post.text.replaceAll("\n", "<br/>"))</p>
             
             @if(authUser.isDefined) {
-            <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a>
+            <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a><br/>
+            <a href="@routes.Blog.deletePost(post.id.get) class="postEditLink">Delete</a>
             }
             <hr width="200">
             <br />
@@ -31,7 +32,7 @@
             <ul>
                 @currentPage.prev.map { page =>
                     <li class="prev">
-                    <a href="@routes.Application.listPosts(page)">&larr; Newer</a>
+                    <a href="@routes.Blog.listPosts(page)">&larr; Newer</a>
                     </li> 
                 }.getOrElse {
                     &nbsp;
@@ -40,7 +41,7 @@
                 
                 @currentPage.next.map { page =>
                     <li class="next">
-                    <a href="@routes.Application.listPosts(page)">Older &rarr;</a>
+                    <a href="@routes.Blog.listPosts(page)">Older &rarr;</a>
                     </li> 
                 }.getOrElse {
                     &nbsp;

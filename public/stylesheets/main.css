@@ -34,7 +34,15 @@ body {
     text-align: center;
     font-size: 15px;
 }
+#nav {
+    text-align: center;
+    font-size: 15px;
+}
 
+#nav a {
+	padding-left: 15px;
+	padding-right: 15px;
+}
 .postTitle {
     font-weight: bold;
     position: relative;
