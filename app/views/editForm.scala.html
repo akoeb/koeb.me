@@ -3,7 +3,7 @@
 @import helper._
 
 
-@main("Modify an existing post") {
+@main("Modify an existing post", None) {
     
     <h1>Modify a post</h1>
     @form(routes.Blog.deletePost(id), 'class -> "topRight") {

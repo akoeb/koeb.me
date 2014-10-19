@@ -1,8 +1,11 @@
 NEXT:
 ====
+* on page create: allow some html input
+* 404 error handler
+* https in all internal
+* controller for static pages
+* implement tags 
 * in session management, store user id instead of username
-* on listing: link to create new ONLY if logged in
-* on listin: pagination ONLY if there are more pages
 * connect to external database
 * blog post sub pages
 * cashing of index page and sub pages

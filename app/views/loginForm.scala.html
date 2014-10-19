@@ -1,8 +1,7 @@
 @(loginForm: Form[(String,String)])(implicit flash: Flash)
 
 @import helper._
-
-@main("Please authenticate to continue") {
+@main("Please authenticate to continue", None) {
 
     @helper.form(routes.Application.authenticate) {
         

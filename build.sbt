@@ -6,7 +6,8 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
-    "org.mindrot" % "jbcrypt" % "0.3m"
+  "org.mindrot" % "jbcrypt" % "0.3m",
+  "org.jsoup" % "jsoup" % "1.8.1"
 )     
 
 

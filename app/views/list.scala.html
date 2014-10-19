@@ -1,6 +1,6 @@
 @(currentPage: Page[Post], authUser: Option[String])(implicit flash: Flash)
 @import helper._
-@main("koeb.me: things I want to tell the world"){
+@main("koeb.me: things I want to tell the world", authUser){
     <p>&nbsp;</p>
     @flash.get("success").map { message =>
         <div class="success">
@@ -12,16 +12,14 @@
             <strong>Error!</strong><br/>@message
         </div>
     }
-    @Option(authUser).filterNot(_.isEmpty).map { user =>
-    	<h2>Logged in user: @authUser.orNull</h2>
-    }
     	
     @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
         @postList.map { post =>
-            <h2 class="postTitle">@post.title</h2>
+            <h2 class="postTitle">@Html(post.title)</h2>
             <div class="postDate">Posted on @post.created.map(_.format("yyyy-MM-dd"))</div>
-            <div class="postTeaser">@post.teaser</div>
-            <p class="postText">@post.text</p>
+            <div class="postTeaser">@Html(post.teaser.getOrElse{""})</div>
+            <p class="postText">@Html(post.text.replaceAll("\n", "<br/>"))</p>
+            
             @if(authUser.isDefined) {
             <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a>
             }
@@ -36,9 +34,7 @@
                     <a href="@routes.Application.listPosts(page)">&larr; Newer</a>
                     </li> 
                 }.getOrElse {
-                    <li class="prev disabled">
-                    <a>&larr; Newer</a>
-                    </li>
+                    &nbsp;
                 }
     
                 
@@ -47,9 +43,7 @@
                     <a href="@routes.Application.listPosts(page)">Older &rarr;</a>
                     </li> 
                 }.getOrElse {
-                    <li class="next disabled">
-                    <a>Older &rarr;</a>
-                    </li>
+                    &nbsp;
                 }
             </ul>
         </div>    

@@ -59,13 +59,11 @@ object Application extends Controller with Secured {
        loginForm.bindFromRequest.fold(
            formWithErrors => BadRequest(html.loginForm(formWithErrors)),
            user => {
-        	   Logger.info("Found user: " + user.toString)
+        	   
                 val uuid = java.util.UUID.randomUUID.toString
                 val token = uuid + ":username"
-                Logger.info("user authenticated ok: " + user.toString + ", token: " + token)
                 Cache.set(token, user._1)
-                Redirect(routes.Blog.createPost).withSession(
-                    "uuid" -> uuid)
+                Redirect(routes.Blog.createPost).withSession("uuid" -> uuid)
            }
        )
    }

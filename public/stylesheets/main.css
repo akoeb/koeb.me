@@ -17,16 +17,17 @@ body {
 
 #outer {
     margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
     padding: 5px;
     width: 900px;
     border-radius: 15px;
     -webkit-border-radius: 15px;
-    box-shadow: -10px 10px 5px #888888;
+    box-shadow: -10px 10px 5px #c0c0c0;
     text-align: left;
     border: 1px solid black;
-    background-image: url("/assets/images/background.jpg");
+    background-color: #F8F8F8;
     background-repeat:repeat;
-    text-shadow: -1px 1px white, -1px 1px #444;
 }
 
 #conHead {

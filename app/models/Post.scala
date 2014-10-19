@@ -1,13 +1,14 @@
 package models
 
+import play.api.Logger
 import play.api.db._
 import play.api.Play.current
-
 import anorm._
 import anorm.SqlParser._
-
 import java.util.{Date}
-
+import org.jsoup._, safety._
+import play.Application
+import controllers._
 
 
 /**
@@ -24,6 +25,8 @@ case class Post(id: Pk[Long] = NotAssigned, title: String, teaser: Option[String
 
 
 object Post {
+    val whitelist = new Whitelist();
+    
 
     // parser for sql queries:
     val post = {
@@ -83,9 +86,9 @@ object Post {
                     (select next value for post_id_seq), 
                     {title}, {teaser}, {text}, now()
                 )""").on(
-                'title -> post.title,
-                'teaser -> post.teaser,
-                'text -> post.text
+                'title -> stripHtml(post.title),
+                'teaser -> stripHtml(post.teaser),
+                'text -> stripHtml(post.text)
             ).executeUpdate()
         }
     }
@@ -106,9 +109,9 @@ object Post {
             """
             ).on(
                 'id -> id,
-                'title -> post.title,
-                'teaser -> post.teaser,
-                'text -> post.text
+                'title -> stripHtml(post.title),
+                'teaser -> stripHtml(post.teaser),
+                'text -> stripHtml(post.text)
             ).executeUpdate()
         }
     }
@@ -126,4 +129,21 @@ object Post {
         }
     }
 
+    def stripHtml(string: String) = {
+        
+        val baseURL = play.Play.application().configuration().getString("application.baseUrl")
+        
+        Jsoup.clean(string, 
+            baseURL, 
+            Whitelist.basicWithImages().preserveRelativeLinks(true))
+    }
+    
+    def stripHtml(string: Option[String]):String = {
+        if(string.isDefined) {
+        	stripHtml(string.orNull)
+        }
+        else {
+          ""
+        }
+    }
 }

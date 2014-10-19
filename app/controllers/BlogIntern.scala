@@ -10,6 +10,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
+
 // need that for Pk datatype
 import anorm._
 
@@ -28,11 +29,11 @@ object Blog extends Controller with Secured {
             "title" -> nonEmptyText,
             "teaser" -> optional(text),
             "text" -> nonEmptyText,
-            "created" -> optional(date)  // TODO: how to make that ignored?
+            "created" -> optional(date)
         )(Post.apply)(Post.unapply)
     )
 
-
+    
     /**
      * display form to create a new post
      *

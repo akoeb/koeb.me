@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, authUser: Option[String])(content: Html)
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,11 +9,13 @@
     </head>
     <body>
         <div id="outer">
+        @if(authUser.isDefined) {<div style="text-align:left; position:absolute; margin-top: 20px; margin-left: 20px"><img src="/assets/images/attention.gif" /></div>}
         <div id="conHead">
             <h1>koeb.me</h1>
             <p>Yet another unnecessary blog</p>
             <hr width="500">
         </div>
+        
         <div id="content">
         @content
         </div>
