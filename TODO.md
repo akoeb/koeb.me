@@ -1,7 +1,5 @@
 NEXT:
 ====
-* on page create: allow some html input
-* 404 error handler
 * https in all internal
 * controller for static pages
 * implement tags 
