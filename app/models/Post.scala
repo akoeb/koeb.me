@@ -131,7 +131,8 @@ object Post {
 
     def stripHtml(string: String) = {
         
-        val baseURL = play.Play.application().configuration().getString("application.baseUrl")
+        val baseURL = play.Play.application().configuration().getString("application.protocol") + 
+        		play.Play.application().configuration().getString("application.baseUrl")
         
         Jsoup.clean(string, 
             baseURL, 

@@ -2,9 +2,8 @@
 
 @import helper._
 @main("Please authenticate to continue", None) {
+	@form(routes.Application.login()) {
 
-    @helper.form(routes.Application.authenticate) {
-        
         <h1>Sign in</h1>
         
         @loginForm.globalError.map { error =>
@@ -22,5 +21,6 @@
         <p>@inputText(loginForm("username"), args = 'size -> 40,'_label -> "Username")</p>
         <p>@inputPassword(loginForm("password"), args = 'size -> 40,'_label -> "Password")</p>
         <p><button type="submit" id="loginbutton">Login</button></p>
+        
     }
 }
