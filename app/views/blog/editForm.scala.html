@@ -1,9 +1,9 @@
-@(id: Long, postForm: Form[Post])
+@(id: Long, postForm: Form[Post])(implicit flash: Flash, lang: Lang)
 
 @import helper._
 
 
-@main("Modify an existing post", None) {
+@main(Some("Modify an existing post"), None) {
     
     <h1>Modify a post</h1>
     @form(routes.Blog.deletePost(id), 'class -> "topRight") {

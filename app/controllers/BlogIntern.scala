@@ -11,6 +11,7 @@ import play.api.data._
 import play.api.data.Forms._
 
 
+
 // need that for Pk datatype
 import anorm._
 
@@ -38,7 +39,7 @@ object Blog extends Controller with Secured {
      * @param page Current page number (starts from 0)
      * @param postsPerPage number of posts on one page
      */
-    def listPosts(page: Int, postsPerPage: Int = 10) = Action { implicit request =>
+    def listPosts(page: Int, postsPerPage: Int = 10) =  Action { implicit request =>
         Ok(html.blog.list(Post.list(page = page, postsPerPage = postsPerPage), username(request)))
     }
 
@@ -47,7 +48,9 @@ object Blog extends Controller with Secured {
      *
      * @param id the post id
      */
-    def showPost(id: Long) = Action { implicit request =>
+    def showPost(id: Long) = 
+      Action { implicit request =>
+    
       	
       	val nextPost = Post.findPostById(id + 1)
       	val prevPost = Post.findPostById(id - 1)
@@ -62,7 +65,7 @@ object Blog extends Controller with Secured {
      * display form to create a new post
      *
      */
-    def createPost = IsAuthenticated { user => request =>
+    def createPost = IsAuthenticated { user => implicit request =>
         Ok(html.blog.createForm(blogPostForm))
     }
 
@@ -87,7 +90,7 @@ object Blog extends Controller with Secured {
      *
      * @param id the post id
      */
-    def editPost(id: Long) = IsAuthenticated { user => request =>
+    def editPost(id: Long) = IsAuthenticated { user => implicit request =>
         Post.findPostById(id).map { post =>
             Ok(html.blog.editForm(id,blogPostForm.fill(post)))
         }.getOrElse(NotFound(views.html.errors.onNotFound()))

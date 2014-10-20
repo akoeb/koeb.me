@@ -57,6 +57,7 @@ object Application extends Controller with Secured {
                 Redirect(routes.Blog.createPost).withSession("uuid" -> uuid)
            }
        )
+       
    }
    
    /**

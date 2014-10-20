@@ -1,0 +1,15 @@
+blog.name = Blog
+about.name = Über mich
+about.title = Über mich
+about.content = <h2>DevOps mit Geschäftsblick</h2> \
+<p> \
+Mein Tätigkeitsschwerpunkt ist Design und Entwicklung von \
+webbasierter Software und biete in diesem Zusammenhang auch teporäre \
+oder permanente Administration von Serversystemen als eigenständige \
+Instanz oder in einem Cloudumfeld an. Desweiteren berate ich Sie zu \
+Softwarearchitekturfragen, helfe Ihnen bei der Geschäftsanalyse, bei \
+Anforderungsentwicklung und Workflowoptimierung.\
+</p>
+contact.name = Kontakt
+contact.title = Kontakt
+contact.content =

@@ -2,6 +2,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 
+
 import models._
 import views._
 
@@ -14,7 +15,7 @@ object StaticPages extends Controller {
     }
 
     
-    def about = Action { implicit request =>
+    def about =  Action { implicit request =>
       Ok(html.statics.about())
     }
     

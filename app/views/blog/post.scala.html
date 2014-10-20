@@ -1,6 +1,6 @@
-@(currentPost: Post, nextPost: Option[Post], prevPost: Option[Post], authUser: Option[String])(implicit flash: Flash)
+@(currentPost: Post, nextPost: Option[Post], prevPost: Option[Post], authUser: Option[String])(implicit flash: Flash, lang: Lang)
 @import helper._
-@main("koeb.me: things I want to tell the world", authUser){
+@main(None, authUser){
     <p>&nbsp;</p>
     @flash.get("success").map { message =>
         <div class="success">
@@ -12,17 +12,19 @@
             <strong>Error!</strong><br/>@message
         </div>
     }
-    	
-    
-    
+    @if(lang.code == "de") {
+    	<div class="warning">This blog is at the moment only available in english!</div>
+    } 
     <h2 class="postTitle">@Html(currentPost.title)</h2>
     <div class="postDate">Posted on @currentPost.created.map(_.format("yyyy-MM-dd"))</div>
     <div class="postTeaser">@Html(currentPost.teaser.getOrElse{""})</div>
     <p class="postText">@Html(currentPost.text)</p>
             
     @if(authUser.isDefined) {
-    <a href="@routes.Blog.editPost(currentPost.id.get)" class="postEditLink">Modify</a><br/>
-    <a href="@routes.Blog.deletePost(currentPost.id.get) class="postEditLink">Delete</a>
+      <a href="@routes.Blog.editPost(currentPost.id.get)" class="postEditLink">Modify</a><br/>
+      @helper.form(action = routes.Blog.deletePost(currentPost.id.get)) {
+  		<button type="submit" name="delete" id="edit" class="postEditLink">Delete</button>
+	  }
     }
     <hr width="200">
     <br />

@@ -1,6 +1,6 @@
 @* onNotFound Template File *@
-@(param: Any)
-@main("File Not Found", None) {
+@(param: Any)(implicit lang: Lang)
+@main(Some("File Not Found"), None) {
 
 <div class="error">
 <h1>Not Found</h1>

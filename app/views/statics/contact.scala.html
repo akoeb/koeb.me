@@ -1,6 +1,9 @@
-@(param: Any)(implicit flash: Flash)
+@(param: Any)(implicit flash: Flash, lang: Lang)
 @import helper._
-@main("Get in Touch", None){
+@main(Some(Messages("contact.title")), None){
     <p>&nbsp;</p>
-    <h1>Contact</h1>
+    <h1>@Messages("contact.title")</h1>
+    
+    @Html(Messages("contact.content"))
+
 }

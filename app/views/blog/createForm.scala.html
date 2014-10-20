@@ -1,9 +1,9 @@
-@(postForm: Form[Post])
+@(postForm: Form[Post])(implicit flash: Flash, lang: Lang)
 
 @import helper._
 
 
-@main("Add a new post", None) {
+@main(Some("Add a new post"), None) {
     
     <h1>Add a post</h1>
     

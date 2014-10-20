@@ -1,6 +1,6 @@
-@(currentPage: Page[Post], authUser: Option[String])(implicit flash: Flash)
+@(currentPage: Page[Post], authUser: Option[String])(implicit flash: Flash, lang: Lang)
 @import helper._
-@main("koeb.me: things I want to tell the world", authUser){
+@main(None, authUser){
     <p>&nbsp;</p>
     @flash.get("success").map { message =>
         <div class="success">
@@ -12,6 +12,9 @@
             <strong>Error!</strong><br/>@message
         </div>
     }
+    @if(lang.code == "de") {
+    	<div class="warning">This blog is at the moment only available in english!</div>
+    } 
     	
     @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
         @postList.map { post =>
@@ -26,8 +29,10 @@
             <div class="detailsLink"><a href="@routes.Blog.showPost(post.id.get)">read Post</a></div>
             
             @if(authUser.isDefined) {
-            <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a><br/>
-            <a href="@routes.Blog.deletePost(post.id.get)" class="postEditLink">Delete</a>
+              <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a><br/>
+              @helper.form(action = routes.Blog.deletePost(post.id.get)) {
+  		        <button type="submit" name="delete" id="edit" class="postEditLink">Delete</button>
+	          }
             }
             <hr width="200">
             <br />

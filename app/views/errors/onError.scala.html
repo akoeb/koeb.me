@@ -1,7 +1,7 @@
 @* onError Template File *@
-@(param: Any)
+@(param: Any)(implicit lang: Lang)
 
- @main("ERROR", None) {
+ @main(Some("ERROR"), None) {
 
 
 <div class="error">

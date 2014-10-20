@@ -1,11 +1,12 @@
 NEXT:
 ====
-* implement tags 
-* in session management, store user id instead of username
-* cashing of index page and sub pages
+* fill contact and about pages
+* MINOR implement tags 
+* MINOR in session management, store user id instead of username
+* caching of index page and sub pages (NO, that garbles the change on logged in state!!)
 * check out google fast web app recommendations
-* html compress, asset uglify, cache assets
-* fix that ignored crap, test whether date can be overwritten
+* MINOR html compress, asset uglify, cache assets
+* MINOR fix that ignored crap, test whether date can be overwritten
 * install blog somewhere in production, start to write posts
 * https in form submit in production mode:  <form action="https:@(play.Play.application().configuration().getString("application.baseUrl"))@(routes.Application.login)" method="POST">
 
