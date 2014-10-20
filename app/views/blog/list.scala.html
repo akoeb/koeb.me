@@ -20,7 +20,7 @@
             @post.teaser.map { teaser =>
             	<div class="postTeaser">@Html(teaser)</div>
             }.getOrElse {
-            	<p class="postText">@Html(post.text.substring(0,100))</p>
+            	<p class="postText">@Html(post.text.take(100))</p>
             }
             <br />
             <div class="detailsLink"><a href="@routes.Blog.showPost(post.id.get)">read Post</a></div>

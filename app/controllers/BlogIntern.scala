@@ -48,16 +48,13 @@ object Blog extends Controller with Secured {
      * @param id the post id
      */
     def showPost(id: Long) = Action { implicit request =>
-      	val post = Post.findPostById(id)
+      	
       	val nextPost = Post.findPostById(id + 1)
       	val prevPost = Post.findPostById(id - 1)
       	
-      	if (post.isDefined) {
-      	  Ok(html.blog.post(post, nextPost, prevPost, username(request)))
-      	}
-      	else {
-      	  NotFound
-      	}
+      	Post.findPostById(id).map { post => 
+            Ok(html.blog.post(post, nextPost, prevPost, username(request)))
+        }.getOrElse(NotFound(views.html.errors.onNotFound()))
     }
 
     
@@ -93,7 +90,7 @@ object Blog extends Controller with Secured {
     def editPost(id: Long) = IsAuthenticated { user => request =>
         Post.findPostById(id).map { post =>
             Ok(html.blog.editForm(id,blogPostForm.fill(post)))
-        }.getOrElse(NotFound)
+        }.getOrElse(NotFound(views.html.errors.onNotFound()))
     }
 
     /**

@@ -129,22 +129,28 @@ object Post {
         }
     }
 
-    def stripHtml(string: String) = {
+    def stripHtml(string: String):Option[String] = {
         
         val baseURL = play.Play.application().configuration().getString("application.protocol") + 
         		play.Play.application().configuration().getString("application.baseUrl")
         
-        Jsoup.clean(string, 
+        val retval = Jsoup.clean(string.replaceAll("\n", "<br/>"), 
             baseURL, 
-            Whitelist.basicWithImages().preserveRelativeLinks(true)).replaceAll("\n", "<br/>")
-    }
-    
-    def stripHtml(string: Option[String]):String = {
-        if(string.isDefined) {
-        	stripHtml(string.orNull)
+            Whitelist.basicWithImages().preserveRelativeLinks(true))
+        if (retval.isEmpty) {
+          None
         }
         else {
-          ""
+          Some(retval)
+        }
+    }
+    
+    def stripHtml(string: Option[String]):Option[String] = {
+        if(string.isDefined) {
+        	stripHtml(string.get)
+        }
+        else {
+          None
         }
     }
 }
