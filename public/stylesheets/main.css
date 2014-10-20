@@ -59,10 +59,30 @@ body {
     font-size: 10px;
     vertical-align: top;
 }
+.detailsLink {
+	text-align: left;
+	position: relative;
+	vertical-align: top;
+}
 .postEditLink {
     text-align: right;
     right: 20px;
     font-size: 10px;
+}
+.pagination {
+        position: relative;
+        margin-top:20px;
+        bottom: 30px;
+}
+.prev {
+	text-align: left;
+	left: 30px;
+	position:absolute;
+}
+.next {
+	text-align: right;
+	right: 30px;
+	position:absolute;
 }
 .error {
     margin: 0 auto;

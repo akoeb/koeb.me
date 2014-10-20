@@ -15,38 +15,41 @@
     	
     @Option(currentPage.items).filterNot(_.isEmpty).map { postList =>
         @postList.map { post =>
-            <h2 class="postTitle">@Html(post.title)</h2>
+            <h2 class="postTitle"><a href="@routes.Blog.showPost(post.id.get)">@Html(post.title)</a></h2>
             <div class="postDate">Posted on @post.created.map(_.format("yyyy-MM-dd"))</div>
-            <div class="postTeaser">@Html(post.teaser.getOrElse{""})</div>
-            <p class="postText">@Html(post.text.replaceAll("\n", "<br/>"))</p>
+            @post.teaser.map { teaser =>
+            	<div class="postTeaser">@Html(teaser)</div>
+            }.getOrElse {
+            	<p class="postText">@Html(post.text.substring(0,100))</p>
+            }
+            <br />
+            <div class="detailsLink"><a href="@routes.Blog.showPost(post.id.get)">read Post</a></div>
             
             @if(authUser.isDefined) {
             <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a><br/>
-            <a href="@routes.Blog.deletePost(post.id.get) class="postEditLink">Delete</a>
+            <a href="@routes.Blog.deletePost(post.id.get)" class="postEditLink">Delete</a>
             }
             <hr width="200">
             <br />
         }
 
         <div id="pagination" class="pagination">
-            <ul>
                 @currentPage.prev.map { page =>
-                    <li class="prev">
+                    <div class="prev">
                     <a href="@routes.Blog.listPosts(page)">&larr; Newer</a>
-                    </li> 
+                    </div> 
                 }.getOrElse {
                     &nbsp;
                 }
     
                 
                 @currentPage.next.map { page =>
-                    <li class="next">
+                    <div class="next">
                     <a href="@routes.Blog.listPosts(page)">Older &rarr;</a>
-                    </li> 
+                    </div> 
                 }.getOrElse {
                     &nbsp;
                 }
-            </ul>
         </div>    
 
     }.getOrElse {

@@ -136,7 +136,7 @@ object Post {
         
         Jsoup.clean(string, 
             baseURL, 
-            Whitelist.basicWithImages().preserveRelativeLinks(true))
+            Whitelist.basicWithImages().preserveRelativeLinks(true)).replaceAll("\n", "<br/>")
     }
     
     def stripHtml(string: Option[String]):String = {

@@ -1,16 +1,14 @@
 NEXT:
 ====
-* controller for static pages
 * implement tags 
 * in session management, store user id instead of username
 * connect to external database
-* blog post sub pages
 * cashing of index page and sub pages
 * check out google fast web app recommendations
+* html compress, asset uglify, cache assets
 * publish feature:
 ** when logged on, see all posts, unpublished posts have an extra button "publish", pubished posts have an extra button "unpublish"
 ** when not logged on, see only published posts
-* html compress, asset uglify, cache assets
 * fix that ignored crap, test whether date can be overwritten
 * test what happens if non-existing id is called
 * install blog somewhere in production, start to write posts

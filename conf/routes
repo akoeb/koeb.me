@@ -13,6 +13,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # public list of all blog posts
 GET     /blog                      controllers.Blog.listPosts(p:Int ?= 0, s:Int ?= 10)
+GET     /blog/:id                     controllers.Blog.showPost(id:Long)
 
 # authentication
 # Authentication

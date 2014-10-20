@@ -42,6 +42,24 @@ object Blog extends Controller with Secured {
         Ok(html.blog.list(Post.list(page = page, postsPerPage = postsPerPage), username(request)))
     }
 
+   /**
+     * display one single blog post in its totality
+     *
+     * @param id the post id
+     */
+    def showPost(id: Long) = Action { implicit request =>
+      	val post = Post.findPostById(id)
+      	val nextPost = Post.findPostById(id + 1)
+      	val prevPost = Post.findPostById(id - 1)
+      	
+      	if (post.isDefined) {
+      	  Ok(html.blog.post(post, nextPost, prevPost, username(request)))
+      	}
+      	else {
+      	  NotFound
+      	}
+    }
+
     
     /**
      * display form to create a new post
