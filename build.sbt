@@ -1,6 +1,6 @@
 name := "koeb_me"
 
-version := "1.0-SNAPSHOT"
+version := "0.1.0"
 
 libraryDependencies ++= Seq(
   jdbc,
