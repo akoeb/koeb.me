@@ -1,5 +1,41 @@
 NEXT:
 ====
+* configure app to read application secret from etcd
+* write application secret to etcd with ansible
+* write wrapper that starts sbt to create a new docker image and then ansible to put the image in the coreos docker registry and start new container deleting the old one
+* secure coreOS with firewall, see http://www.snip2code.com/Snippet/55413/Secure-iptables-configuration-for-coreos
+
+
+========================================================================
+https://groups.google.com/forum/#!topic/coreos-user/3IqQBmtTuW4
+So there is _should_ be an iptables script in place (in /usr/lib/systemd/system).  I notice that it's not there.  The spot it loads it's rules from is /var/lib/iptables/rules-save and the actual systemd unit is as follows:
+
+
+# This file is part of systemd.
+#
+# systemd is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+[Unit]
+Description=iptables
+DefaultDependencies=false
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/iptables-restore /var/lib/iptables/rules-save
+
+[Install]
+WantedBy=sysinit.target
+========================================================================
+
+
+
+
+* link to homepage in header
+* rss / atom
 * fill contact and about pages
 * MINOR implement tags 
 * MINOR in session management, store user id instead of username

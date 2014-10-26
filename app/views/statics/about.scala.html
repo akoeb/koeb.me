@@ -3,5 +3,59 @@
 @main(Some(Messages("about.title")), None){
     <p>&nbsp;</p>
     <h1>@Messages("about.title")</h1>
-    @Html(Messages("about.content"))
+
+    @if(lang.code == "de") {
+    <p> 
+    Mein Name ist Alexander Köb, ich wohne in Berlin und ich bin bereits seit 15 Jahren beruflich mit 
+    verschiedensten Aspekten der IT beschäftigt.<br />
+    So habe ich in der Zeit als Softwareentwickler für Web-Applikationen gearbeitet, als Administrator für 
+    Linux Server, als Netzwerkadministrator, habe Second-level-Support Aufgaben übernommen, war Business Analyst,
+    Requirements Engineer, Teamleiter und stellvertretender IT-Leiter.<br />
+    <br /> 
+    Ich begeistere mich für Technik und experimentiere gerne mit den neuen hippen Technologien, speziell die Open-Source Szene
+    produziert neue interessante Sachen in atemberaubender Geschwindigkeit. Aber ich lege ebenfalls Wert darauf,
+    dass die menschliche Seite nicht durch die technische Entwicklung zu kurz kommt.<br>
+    <br />
+    Aus diesem Grunde möchte ich in diesem Blog Artikel schreiben die die Gebiete Technik, den menschlichen Umgang damit und
+    meine Gedanken zu verwanten Themen umfassen.<br/>
+    <br />
+    Dieser Blog wird keine Kommentarfunktion enthalten, solltet Ihr Kommentare zu meinen Artikeln haben so freue ich mich über eine
+    Nachricht, meine E-Mail Adresse könnt ihr der <a href="/contact">Kontaktseite</a> entnehmen.<br />
+    <br />
+    Ich habe den Blog und die zugrundeliegende Software selbst geschrieben, näheres dazu werdet Ihr in einem entsprechenden Blogartikel finden.<br />
+    <br />
+    Zu guter Letzt möchte ich noch auf folgende Seiten verweisen welche mehr Details zu meiner Person enthalten:<br />
+    <ul>
+        <li><a href="https://www.xing.com/profile/Alexander_Koeb">Mein Profil bei Xing</a></li>
+        <li><a href="https://www.linkedin.com/profile/view?id=226593326">Mein LinkedIn Profil</a></li>
+        <li><a href="https://github.com/akoeb">Mein Github Account</a></li>
+    </ul>
+    </p>
+
+    } else {
+    <p>
+    My Name is Alexander Köb, I live currently in the wonderful city of Berlin / Germany and I am a professional in various aspects of the IT 
+    industry since 15 years now<br />
+    I have worked as software developer for web applications, as administrator for linux server and as network administrator. I have dealt with second-level
+    support tasks, I was business analyst, requirements engineer, team lead and assistant IT director.<br />
+    <br />
+    I am enthusiastic about technology and I love experimenting with all that new hip things that especially the open-source movement delivers with astonishing 
+    rate. However, it is important for me to metion that despite the technological advancement, we still must pay special attention to our human interactions.</br>
+    <br/>
+    For this reason, I want to write articles on this blog that surround the areas technology, the human handling of it and my thoughts to related subjects.<br />
+    <br />
+    This blog will not contain a commentary function, but if you have comments to any of my posts, you are welcome to send me a message, my 
+    e-mail address can be found on the <a href="/contact">contact</a> page.<br />
+    <br />
+    I have written this blog and the software it is based on myself, I explain that in more detail in one of me blog posts.<br />
+    <br />
+    Last but not least, I want to link to other resources in the internet that contain information about my person:<br />
+    <ul>
+        <li><a href="https://www.xing.com/profile/Alexander_Koeb">my Xing profile</a></li>
+        <li><a href="https://www.linkedin.com/profile/view?id=226593326">my LinkedIn profile</a></li>
+        <li><a href="https://github.com/akoeb">my Github account</a></li>
+    </ul>
+    </p>
+
+    }
 }

@@ -1,3 +1,8 @@
+// needed for docker:
+import NativePackagerKeys._
+
+
+
 name := "koeb_me"
 
 version := "0.1.0"
@@ -12,3 +17,13 @@ libraryDependencies ++= Seq(
 
 
 play.Project.playScalaSettings
+
+
+// for docker:
+maintainer in Docker := "Alexander Köb <nerdkram@koeb.me>"
+
+dockerBaseImage in Docker := "debian:stable"
+
+dockerExposedPorts in Docker := Seq(9000)
+
+dockerExposedVolumes in Docker := Seq("/data")
