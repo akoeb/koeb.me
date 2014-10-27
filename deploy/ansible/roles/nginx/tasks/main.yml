@@ -1,0 +1,46 @@
+- name: check whether we need to import the dockerimage
+  shell: docker images | grep nginx
+  register: need_image_import
+  ignore_errors: True
+
+
+- name: create directory for upload
+  file: path=/home/core/upload owner=core group=core mode=0755 state=directory
+  when: need_image_import | failed
+
+- name: copy docker image
+  copy: src=nginx_dockerimage.tar.bz2 dest=/home/core/upload
+  when: need_image_import | failed
+
+# - name: delete old image file
+#   file: path=upload/nginx_dockerimage.tar state=absent
+# 
+# - name: unzip dockerimage
+#   shell: bunzip2 /home/core/upload/nginx_dockerimage.tar.bz2
+#   when: need_image_import | failed
+
+- name: import docker image
+  shell: bunzip2 -c /home/core/upload/nginx_dockerimage.tar.bz2 | docker import - nginx
+  when: need_image_import | failed
+
+## dont launch the docker container, let this be done by fleet 
+## - name: launch nginx container
+##   docker:
+##      image="nginx"
+##      name="web"
+##      ports="80:80"
+##      state=running
+
+
+- name: upload the service files
+  copy: src={{item}} dest=/home/core/upload/
+  with_items: 
+      - nginx-discovery.1.service
+      - nginx.1.service
+        
+- name: import service files
+  shell: fleetctl start upload/{{item}}
+  with_items:
+      - nginx.1.service
+      - nginx-discovery.1.service
+

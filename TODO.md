@@ -1,7 +1,5 @@
 NEXT:
 ====
-* data file path dynamic
-* configure app && docker to read certificate && app secret from outside docker
 * change admin password
 * set up ansible to hand in app secret and cerificate and admin password into docker
 * java 1.8

@@ -1,0 +1,4 @@
+* vagrant up 
+* make sure ip address of image is correct: 172.17.8.101 (or change inventory)
+docker save nginx > files/nginx_dockerimage.tar
+docker save koeb_me > files/koeb_me_dockerimage.tar

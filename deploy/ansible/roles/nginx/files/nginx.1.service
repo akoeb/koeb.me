@@ -1,0 +1,15 @@
+[Unit]
+Description=NginX Front End
+After=docker.service
+After=koeb_me.1.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill web1
+ExecStartPre=-/usr/bin/docker rm web1
+ExecStart=/usr/bin/docker run --rm --name web1 -p 80:80 -p 443:443 --link koeb_me_1:app1 nginx /usr/sbin/nginx
+ExecStop=/usr/bin/docker stop web1
+
+[X-Fleet]
+Conflicts=nginx.*.service

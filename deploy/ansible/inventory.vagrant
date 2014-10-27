@@ -1,0 +1,15 @@
+## inventory file for vagrant machines
+core-01 ansible_ssh_host=172.17.8.101
+
+[web]
+core-01
+
+[app]
+core-01
+
+
+[coreos]
+core-01
+
+[coreos:vars]
+ansible_python_interpreter="PATH=/home/core/bin:$PATH python"

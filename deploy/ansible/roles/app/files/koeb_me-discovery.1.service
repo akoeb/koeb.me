@@ -1,0 +1,11 @@
+[Unit]
+Description=Announce koeb_me 1
+BindsTo=koeb_me.1.service
+
+[Service]
+ExecStart=/bin/sh -c "while true; do etcdctl set /services/website/app1 '{ \"host\": \"%H\", \"port\": 9000 }' --ttl 60; sleep 45; done"
+ExecStop=/usr/bin/etcdctl rm /services/website/app1
+
+[X-Fleet]
+MachineOf=koeb_me.1.service
+

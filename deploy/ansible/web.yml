@@ -1,0 +1,10 @@
+# this requires the role coreos-bootstrap from defunctzombie installed
+# see https://github.com/defunctzombie/ansible-coreos-bootstrap
+- name: provision web servers
+  hosts: web
+  sudo: false
+  gather_facts: False
+  roles:
+    - nginx
+
+

@@ -1,0 +1,66 @@
+- name: check whether we need to import the dockerimage
+  shell: docker images | grep koeb.me
+  register: need_image_import
+  ignore_errors: True
+
+- name: create directory for upload
+  file: path=/home/core/upload owner=core group=core mode=0755 state=directory
+  when: need_image_import | failed
+
+- name: copy docker image
+  copy: src=koeb_me_dockerimage.tar.bz2 dest=/home/core/upload/
+  when: need_image_import | failed
+
+# - name: delete old image file
+#   file: path=upload/koeb_me_dockerimage.tar state=absent
+# 
+# - name: unzip docker image
+#   shell: bunzip2 /home/core/upload/koeb_me_dockerimage.tar.bz2
+#   when: need_image_import | failed
+
+- name: import docker image
+  shell: bunzip2 -c /home/core/upload/koeb_me_dockerimage.tar.bz2 | docker import - koeb_me
+  when: need_image_import | failed
+
+- name: launch data container
+  docker: volumes="/opt/docker/data" name="data-container" image="busybox" command="chown daemon -R /opt/docker/data"
+
+## do not launch the container, that is done by fleet!!
+##- name: launch koeb_me container
+##  docker:
+##     image="koeb_me"
+##     name="app"
+##     volumes_from="data-container"
+##     ports="9000:9000"
+##     state=running
+
+- name: upload the service files
+  copy: src={{item}} dest=/home/core/upload/
+  with_items: 
+      - koeb_me-discovery.1.service
+      - koeb_me.1.service
+
+- name: run an evolution for the database
+  docker: 
+      image="koeb_me" 
+      name="evolution" 
+      volumes_from="data-container" 
+      command="/opt/docker/bin/wrapper.sh -mem 256 -DapplyEvolutions.default=true"
+
+- name: wait 5 sec for evolution
+  pause: seconds=5
+
+- name: change admin password
+  docker: image="koeb_me" name="admin_pw" volumes_from="data-container" command="/opt/docker/bin/wrapper.sh password {{admin_password}}
+
+
+- name: kill evolution container
+  docker: name="evolution" image="koeb_me" state=absent
+
+
+- name: import service files
+  shell: fleetctl start upload/{{item}}
+  with_items:
+      - koeb_me.1.service
+      - koeb_me-discovery.1.service
+

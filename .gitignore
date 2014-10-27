@@ -2,10 +2,12 @@ logs
 project/project
 project/target
 target/.history
+target/docker
 target/resolution-cache
 target/scala-2.10
 target/streams
-target/universal
+target/universal/tmp
+target/universal/stage/share/
 tmp
 .history
 dist

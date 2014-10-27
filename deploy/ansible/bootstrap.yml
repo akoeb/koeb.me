@@ -1,0 +1,10 @@
+# this requires the role coreos-bootstrap from defunctzombie installed
+# see https://github.com/defunctzombie/ansible-coreos-bootstrap
+- name: bootstrap coreos hosts
+  hosts: coreos
+  sudo: true
+  gather_facts: False
+  roles:
+    - bootstrap
+
+

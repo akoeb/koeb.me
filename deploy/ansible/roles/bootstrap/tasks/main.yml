@@ -1,0 +1,35 @@
+- name: do we need to bootstrap python?
+  raw: stat /home/core/bin/python
+  register: need_bootstrap
+  ignore_errors: True
+
+- name: Run bootstrap.sh
+  script: bootstrap.sh
+  when: need_bootstrap | failed
+
+- name: Check if we need to install pip
+  shell: "{{ansible_python_interpreter}} -m pip --version"
+  register: need_pip
+  ignore_errors: True
+  changed_when: false
+
+- name: Copy get-pip.py
+  copy: src=get-pip.py dest=/home/core/get-pip.py
+  when: need_pip | failed
+
+- name: Install pip
+  shell: "{{ansible_python_interpreter}} get-pip.py"
+  when: need_pip | failed
+
+- name: Install pip launcher
+  copy: src=pip-wrapper dest=/home/core/bin/pip mode=0755
+
+- name: Install docker-py
+  pip: name=docker-py
+
+- name: Start etcd
+  service: name=etcd.service state=started
+
+- name: Start fleet
+  service: name=fleet.service state=started
+
