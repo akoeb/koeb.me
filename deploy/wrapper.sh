@@ -68,7 +68,7 @@ function stream_backup() {
         -script /opt/docker/data/backup.sql 
 
     # stream to STDOUT for reading outside of the container
-    cat /opt/docker/data/backup.zip
+    cat /opt/docker/data/backup.sql
 }
 
 function reset_admin_pw() {
