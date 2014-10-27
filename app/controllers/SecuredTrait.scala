@@ -1,8 +1,11 @@
 package controllers
 import play.api._
+
 import play.api.mvc._
 import play.api.cache.Cache
-import play.api.Play.current 
+import play.api.Play.current
+import action._
+
 /**
  * This trait is stolen from the zenworks example and extended with token based session management
  */
@@ -28,7 +31,7 @@ trait Secured {
    * Action for authenticated users.
    */
   def IsAuthenticated(f: => String => Request[AnyContent] => Result) = Security.Authenticated(username, onUnauthorized) { user =>
-    Action(request => f(user)(request))
+    HttpsAction(request => f(user)(request))
   }
 
 
