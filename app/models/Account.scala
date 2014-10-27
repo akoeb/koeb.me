@@ -7,12 +7,12 @@ import anorm.SqlParser._
 import org.mindrot.jbcrypt.BCrypt
 import play.api.Logger
 
-case class Account(id: Pk[Long] = NotAssigned, username: String, password: String, email: String )
+case class Account(id: Option[Long] = None, username: String, password: String, email: String )
 
 object Account {
     // parser for sql queries:
     val account = {
-        get[Pk[Long]]("id") ~
+        get[Option[Long]]("id") ~
         get[String]("username") ~
         get[String]("password") ~
         get[String]("email") map {

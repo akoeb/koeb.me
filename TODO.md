@@ -1,10 +1,19 @@
 NEXT:
 ====
-* configure app to read application secret from etcd
-* write application secret to etcd with ansible
-* write wrapper that starts sbt to create a new docker image and then ansible to put the image in the coreos docker registry and start new container deleting the old one
+* data file path dynamic
+* configure app && docker to read certificate && app secret from outside docker
+* change admin password
+* set up ansible to hand in app secret and cerificate and admin password into docker
+* java 1.8
 * secure coreOS with firewall, see http://www.snip2code.com/Snippet/55413/Secure-iptables-configuration-for-coreos
-
+* remove nginx from setup
+* make app understand http and https
+* make app link to https on /intern
+* create filter to have  /intern links only through https
+* contact page
+* link to home page
+* find why fleet unit file does noot work
+* backups
 
 ========================================================================
 https://groups.google.com/forum/#!topic/coreos-user/3IqQBmtTuW4
@@ -34,9 +43,7 @@ WantedBy=sysinit.target
 
 
 
-* link to homepage in header
 * rss / atom
-* fill contact and about pages
 * MINOR implement tags 
 * MINOR in session management, store user id instead of username
 * caching of index page and sub pages (NO, that garbles the change on logged in state!!)

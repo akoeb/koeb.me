@@ -1,25 +1,20 @@
 #!/bin/bash
 # wrapper to build a docker container from the app
-# uses partly thedocker task of the sbt plugin sbt-native-packager
-# http://www.scala-sbt.org/sbt-native-packager/DetailedTopics/docker.html
-# but adds additional RUN commands to docker file
-# additionally, after creating the image, a container is started from that image and exported,
-# to flatten the result
+# * run activator stage to prepare the app
+# * copy docker file from deploy to target
+# * copy wrapper script from deploy to target
+# * run docker build
 
+set -ex
 
-# create docker file with the app prepared:
-sbt docker:stage
+# prepare the app in target/stage:
+activator stage
 
-# now manipulate the docker file
-cd target/docker
-if ! grep -q openjdk-7-jre-headless Dockerfile
-then
-    dockerfile=$(awk '/^WORKDIR / { print; print "RUN apt-get update && apt-get install -y openjdk-7-jre-headless && apt-get clean"; next }1' Dockerfile)
-    echo -en "$dockerfile" > Dockerfile
-fi
+# get the docker file
+cp deploy/Dockerfile target/universal/stage/
 
-# remove entrypoint to give more control to outside:
-sed  's/ENTRYPOINT \["bin\/koeb_me"\]/ENTRYPOINT \[\]/' -i Dockerfile
+# get the wrapper script from deploy
+cp deploy/wrapper.sh target/universal/stage/bin/
 
 # then run a docker build:
 docker build --tag koeb_me .
@@ -29,8 +24,9 @@ VERSION=$(cat ../../build.sbt | perl -ne 'if(/^version := "([\d\.]+)"/) {print $
 docker tag koeb_me:latest koeb_me:$VERSION
 
 # flatten the image:
-docker run -d --name web  --volumes-from data-container  koeb_me
-docker export web | bzip2 -c >  $HOME/projects/coreOS/myCoreOs-bootstrap/roles/app/files/koeb_me_dockerimage.tar.bz2
-docker stop web
-docker rm web
+# we do not do this regularly
+# docker run -d --name web  --volumes-from data-container  koeb_me
+# docker export web | bzip2 -c >  $HOME/projects/coreOS/myCoreOs-bootstrap/roles/app/files/koeb_me_dockerimage.tar.bz2
+# docker stop web
+# docker rm web
 

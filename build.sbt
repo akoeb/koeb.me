@@ -13,11 +13,12 @@ libraryDependencies ++= Seq(
   cache,
   "org.mindrot" % "jbcrypt" % "0.3m",
   "org.jsoup" % "jsoup" % "1.8.1"
-)     
+) 
 
+scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
-play.Project.playScalaSettings
-
+// play.Project.playScalaSettings
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 // for docker:
 maintainer in Docker := "Alexander Köb <nerdkram@koeb.me>"

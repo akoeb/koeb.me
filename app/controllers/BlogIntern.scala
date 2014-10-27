@@ -10,11 +10,6 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
-
-
-// need that for Pk datatype
-import anorm._
-
 import models._
 import views._
 
@@ -26,7 +21,7 @@ object Blog extends Controller with Secured {
     */
     val blogPostForm = Form(
         mapping(
-            "id" -> ignored(NotAssigned:Pk[Long]),
+            "id" -> optional(longNumber),
             "title" -> nonEmptyText,
             "teaser" -> optional(text),
             "text" -> nonEmptyText,

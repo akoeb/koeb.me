@@ -23,10 +23,10 @@
             @post.teaser.map { teaser =>
             	<div class="postTeaser">@Html(teaser)</div>
             }.getOrElse {
-            	<p class="postText">@Html(post.text.take(100))</p>
+            	<p class="postText">@Html(post.text.take(3000)) ...</p>
             }
             <br />
-            <div class="detailsLink"><a href="@routes.Blog.showPost(post.id.get)">read Post</a></div>
+            <div class="detailsLink"><a href="@routes.Blog.showPost(post.id.get)">... continue reading post</a></div>
             
             @if(authUser.isDefined) {
               <a href="@routes.Blog.editPost(post.id.get)" class="postEditLink">Modify</a><br/>

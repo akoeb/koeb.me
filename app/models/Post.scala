@@ -9,7 +9,7 @@ import java.util.{Date}
 import org.jsoup._, safety._
 import play.Application
 import controllers._
-
+import scala.language.postfixOps
 
 /**
  * Helper for pagination.
@@ -21,7 +21,7 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 
 
 
-case class Post(id: Pk[Long] = NotAssigned, title: String, teaser: Option[String], text: String, created: Option[Date] )
+case class Post(id: Option[Long] = None, title: String, teaser: Option[String], text: String, created: Option[Date] )
 
 
 object Post {
@@ -30,7 +30,7 @@ object Post {
 
     // parser for sql queries:
     val post = {
-        get[Pk[Long]]("id") ~
+        get[Option[Long]]("id") ~
         get[String]("title") ~
         get[Option[String]]("teaser") ~
         get[String]("text") ~
