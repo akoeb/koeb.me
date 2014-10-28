@@ -1,28 +1,26 @@
-- name: check whether we need to import the dockerimage
-  shell: docker images | grep koeb.me
-  register: need_image_import
-  ignore_errors: True
+#- name: check whether we need to import the dockerimage
+#  shell: docker images | grep koeb.me
+#  register: need_image_import
+#  ignore_errors: True
 
-- name: login at docker registry
-  shell: docker login -u akoeb -p {{docker_password}}
+# - name: login at docker registry
+#   shell: docker login -u akoeb -p {{docker_password}}
 
 - name: get docker image
-  shell: docker pull akoeb/koeb_me
-  when: need_image_import | failed
+  shell: docker pull akoeb/koeb.me
 
 - name: launch data container
   docker: volumes="/opt/docker/data" name="data-container" image="busybox" command="chown daemon -R /opt/docker/data"
 
 - name: create directory for upload
   file: path=/home/core/upload owner=core group=core mode=0755 state=directory
-  when: need_image_import | failed
 
 
 ## do not launch the app container, that is done by fleet!!
 
 - name: run an evolution for the database
   docker: 
-      image="koeb_me" 
+      image="akoeb/koeb.me" 
       name="evolution" 
       volumes_from="data-container" 
       command="/opt/docker/bin/wrapper.sh -mem 256 -DapplyEvolutions.default=true"
@@ -34,7 +32,7 @@
   docker: name="evolution" image="koeb_me" state=absent
 
 - name: change admin password
-  docker: image="koeb_me" name="admin_pw" volumes_from="data-container" command="/opt/docker/bin/wrapper.sh password {{admin_password}}
+  docker: image="akoeb/koeb.me" name="admin_pw" volumes_from="data-container" command="/opt/docker/bin/wrapper.sh password {{admin_password}}"
 
 
 - name: upload the files
