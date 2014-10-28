@@ -1,4 +1,4 @@
-@(postForm: Form[Post])(implicit flash: Flash, lang: Lang)
+@(postForm: Form[Post])(implicit flash: Flash, lang: Lang, request: RequestHeader)
 
 @import helper._
 
@@ -7,7 +7,7 @@
     
     <h1>Add a post</h1>
     
-    @form(routes.Blog.savePost().absoluteURL(secure = true)) {
+    <form method="POST" action="https://www.koeb.me/intern/blog">
          <div class="actions">
             <input type="submit" value="Save" class="btn primary"> or 
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 
@@ -25,8 +25,6 @@
             <input type="submit" value="Save" class="btn primary"> or 
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 
         </div>
-        
-    }
-    
+    </form>
 }
 

@@ -1,4 +1,4 @@
-@(id: Long, postForm: Form[Post])(implicit flash: Flash, lang: Lang)
+@(id: Long, postForm: Form[Post])(implicit flash: Flash, lang: Lang, request: RequestHeader)
 
 @import helper._
 
@@ -6,11 +6,11 @@
 @main(Some("Modify an existing post"), None) {
     
     <h1>Modify a post</h1>
-    @form(routes.Blog.deletePost(id).absoluteURL(secure = true), 'class -> "topRight") {
+   <form action="https://www.koeb.me/intern/blog/@(id)/delete" method="POST" class="topRight">
         <input type="submit" value="Delete this blog post" class="btn danger">
-    }
-    <br />    
-    @form(routes.Blog.updatePost(id).absoluteURL(secure = true)) {
+    </form>
+    <br />  
+    <form action="https://www.koeb.me/intern/blog/@(id)" method="POST">  
         <div class="actions">
             <input type="submit" value="Update" class="btn primary"> or 
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 
@@ -29,11 +29,12 @@
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 
         </div>
         
-    }
+    
+    </form>
 
-    <br />    
-    @form(routes.Blog.deletePost(id), 'class -> "topRight") {
+    <br /> 
+    <form action="https://www.koeb.me/intern/blog/@(id)/delete" method="POST" class="topRight">
         <input type="submit" value="Delete this blog post" class="btn danger">
-    }    
+    </form>    
 }
 

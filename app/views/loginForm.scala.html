@@ -1,8 +1,8 @@
-@(loginForm: Form[(String,String)])(implicit flash: Flash, lang: Lang, request: RequestHeader)
+@(loginForm: Form[(String,String)])(implicit flash: Flash, lang: Lang )
 
 @import helper._
 @main(Some("Please authenticate to continue"), None) {
-	@form(routes.Application.authenticate().absoluteURL()) {
+	<form method="POST" action="https://www.koeb.me/login">
 
         <h1>Sign in</h1>
         
@@ -21,6 +21,5 @@
         <p>@inputText(loginForm("username"), args = 'size -> 40,'_label -> "Username")</p>
         <p>@inputPassword(loginForm("password"), args = 'size -> 40,'_label -> "Password")</p>
         <p><button type="submit" id="loginbutton">Login</button></p>
-        
-    }
+    </form>
 }
