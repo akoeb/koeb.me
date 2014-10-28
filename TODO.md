@@ -1,13 +1,8 @@
 NEXT:
 ====
-* change admin password
-* set up ansible to hand in app secret and cerificate and admin password into docker
 * java 1.8
 * secure coreOS with firewall, see http://www.snip2code.com/Snippet/55413/Secure-iptables-configuration-for-coreos
 * remove nginx from setup
-* make app understand http and https
-* make app link to https on /intern
-* create filter to have  /intern links only through https
 * contact page
 * link to home page
 * find why fleet unit file does noot work

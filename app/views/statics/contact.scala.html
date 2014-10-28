@@ -4,6 +4,45 @@
     <p>&nbsp;</p>
     <h1>@Messages("contact.title")</h1>
     
-    @Html(Messages("contact.content"))
-
+    @if(lang.code == "de") {
+    <p>
+    Wenn ihr mir eure Meinung schreiben wollt, Verbesserungen oder Berichtigungen zu den von mir verfassten Texten habt, oder wenn ihr mir einfach Hallo sagen wollt, freue ich mich auf eine E-Mail von Euch. <br /> 
+    Bitte entschuldigt dass ich die E-Mail Adresse hier als Bild anzeige, ich möchte damit spam bots das Leben ein wenig schwerer machen.<br />
+    Und ihr als meine Leser seid mit Sicherheit in der Lage die E-Mail Adresse abzutippen und seit nicht auf Copy & Paste angewiesen ;-)
+    <br />  
+    <img src="@routes.Assets.at("images/favicon.ico")" />
+    </p>
+    <p>
+    Ich möchte mir noch den Hinweis erlauben dass ich als Freiberufler tätig bin, und solltet ihr mich für eines Eurer Projekte anheuern wollen so schickt mir gerne Euer Angebot. 
+    Ich kann euch nicht versprechen dass ich Zeit habe, aber ich werde auf jeden Fall versuchen euch zeitnah zu antworten. 
+    </p>
+    <p>
+    Und um der deutschen Bürokratie genüge zu tun, hier auch meine Postanschrift und ViSdP:<br>
+    </p>
+    <p>
+    Alexander Köb
+    Schönhauser Allee 58
+    10437 Berlin
+    </p>
+    }
+    else {
+    <p>In case you want to send me your opinion to my website or any of its content, or you have some comments, improvements or corrections. or if you simply want to say "Hi!", then I am glad to receive your email.<br />
+    Please forgive me the fact that I post my email address as an image, my intention is to make the task of spam bots a little bit more dificult.<br/>
+    And I am sure that you guys - being readers of this blog - are smart enough to figure out how to type the email address yourselves, you are not depending on some Copy & Paste mechanism ;-)
+    <br />
+    <img src="@routes.Assets.at("images/favicon.ico")" />
+    </p>
+    <p>
+    I want to add the note that I am working as freelancer, so in case you want to hire me for one of your projects, please feel free to send me an offer. 
+    I can not promise that I will be available, but I will try to at least answer in a timely fashion
+    </p>
+    <p>
+    For the sake of satisfying German bureaucracy, here is my postal address. Responsible for the content according to German law (ViSdP):<br>
+    </p>
+    <p>
+    Alexander Köb
+    Schönhauser Allee 58
+    10437 Berlin
+    </p>
+    }
 }

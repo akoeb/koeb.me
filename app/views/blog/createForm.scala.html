@@ -7,7 +7,7 @@
     
     <h1>Add a post</h1>
     
-    @form(routes.Blog.savePost()) {
+    @form(routes.Blog.savePost().absoluteURL(secure = true)) {
          <div class="actions">
             <input type="submit" value="Save" class="btn primary"> or 
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 

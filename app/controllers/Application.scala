@@ -8,6 +8,7 @@ import play.api.data.Forms._
 
 import models._
 import views._
+import play.twirl.api._
 
 import play.api.cache.Cache
 import play.api.Play.current
@@ -27,7 +28,7 @@ object Application extends Controller with Secured {
     // ACTIONS
 
     // Homepage action
-    def index = Action {
+    def index = Action {implicit request =>
         Redirect(routes.Blog.listPosts(0,10))
     }
 

@@ -6,11 +6,11 @@
 @main(Some("Modify an existing post"), None) {
     
     <h1>Modify a post</h1>
-    @form(routes.Blog.deletePost(id), 'class -> "topRight") {
+    @form(routes.Blog.deletePost(id).absoluteURL(secure = true), 'class -> "topRight") {
         <input type="submit" value="Delete this blog post" class="btn danger">
     }
     <br />    
-    @form(routes.Blog.updatePost(id)) {
+    @form(routes.Blog.updatePost(id).absoluteURL(secure = true)) {
         <div class="actions">
             <input type="submit" value="Update" class="btn primary"> or 
             <a href="@routes.Blog.listPosts()" class="btn">Cancel</a> 
