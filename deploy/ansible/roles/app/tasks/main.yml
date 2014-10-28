@@ -31,8 +31,8 @@
 - name: kill evolution container
   docker: name="evolution" image="koeb_me" state=absent
 
-- name: change admin password
-  docker: image="akoeb/koeb.me" name="admin_pw" volumes_from="data-container" command="/opt/docker/bin/wrapper.sh password {{admin_password}}"
+# - name: change admin password
+#   docker: image="akoeb/koeb.me" name="admin_pw" volumes_from="data-container" command="/opt/docker/bin/wrapper.sh password {{admin_password}}"
 
 
 - name: upload the files
